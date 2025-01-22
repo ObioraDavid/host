@@ -25,87 +25,84 @@
         }
 
         /* Header */
-        header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
-  background: white;
-}
+        .container {
+            max-width:px;
+      margin: 0 auto;
+      padding: 20px;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
 
-.logo a {
-  text-decoration: none;
-}
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      flex-wrap: wrap;
+    }
 
-.logo p {
-  margin: 0;
-}
+    .logo {
+      position: relative;
+      text-align: center;
+      animation: fadeInDown 1s ease-out;
+    }
 
-.logo .bold {
-  font-family: sans-serif;
-  font-size: 40px;
-  color: #0ea5e9;
-}
+    .logo img {
+      width: 250px;
+      height: 70px;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+    }
 
-.logo .mind {
-  font-family: sans-serif;
-  font-size: 38px;
-  color: #000;
-}
+    .logo img:hover {
+      transform: scale(1.05);
+    }
 
-nav {
-  display: flex;
-  gap: 2rem;
-}
+    .logo p {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 24px;
+      color: #2c3e50;
+      margin-top: 15px;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out forwards;
+      animation-delay: 0.5s;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+    }
 
-nav a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-}
+    nav {
+      display: flex;
+      gap: 2rem;
+      animation: fadeInRight 1s ease-out;
+    }
 
-nav a:hover {
-  color: #0ea5e9;
-}
+    nav a {
+      text-decoration: none;
+      color: #2c3e50;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
 
-.menu-button {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-}
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background-color: #3498db;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
 
-@media (max-width: 768px) {
-  .menu-button {
-    display: block;
-  }
-  
-  nav {
-    display: none;
-    position: absolute;
-    top: 80px;
-    left: 0;
-    right: 0;
-    background: white;
-    flex-direction: column;
-    padding: 1rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  }
-  
-  nav.active {
-    display: flex;
-  }
-  
-  nav a {
-    padding: 0.5rem 0;
-  }
-  
-  .logo .bold,
-  .logo .mind {
-    font-size: 32px;
-  }
-}
     nav a:hover {
       color: #3498db;
       background-color: rgba(52, 152, 219, 0.1);
@@ -502,10 +499,6 @@ nav a:hover {
   .cta {
       padding: 50px 20px; /* Reduced from 100px 20px */
   }</style>
-  <script>
-    document.querySelector('.menu-button').addEventListener('click', () => {
-        document.querySelector('nav').classList.toggle('active');
-  </script>
 <body>
   <header style="display: flex; align-items: center; justify-content: space-between;">
     <div class="logo">
