@@ -25,184 +25,128 @@
         }
 
         /* Header */
-        .container {
-            max-width:px;
-      margin: 0 auto;
-      padding: 20px;
-      background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
-      border-radius: 12px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
 
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      flex-wrap: wrap;
-    }
+        header {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    height: 90px;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
 
-    .logo {
-      position: relative;
-      text-align: center;
-      animation: fadeInDown 1s ease-out;
-    }
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
 
-    .logo img {
-      width: 250px;
-      height: 70px;
-      transition: transform 0.3s ease;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
-    }
 
-    .logo img:hover {
-      transform: scale(1.05);
-    }
+        .logo a {
+            text-decoration: none;
+        }
 
-    .logo p {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      font-size: 24px;
-      color: #2c3e50;
-      margin-top: 15px;
-      opacity: 0;
-      animation: fadeInUp 0.8s ease-out forwards;
-      animation-delay: 0.5s;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-weight: 600;
-    }
+        .logo span:first-child {
+            font-size: 40px;
+            color: #0ea5e9;
+        }
 
-    nav {
-      display: flex;
-      gap: 2rem;
-      animation: fadeInRight 1s ease-out;
-    }
+        .logo span:last-child {
+            font-size: 38px;
+            color: #000;
+        }
 
-    nav a {
-      text-decoration: none;
-      color: #2c3e50;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      font-size: 18px;
-      font-weight: 500;
-      padding: 8px 16px;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-      position: relative;
-    }
+        .menu-btn {
+    cursor: pointer;
+    z-index: 1002;
+    position: relative;
+}
 
-    nav a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: 0;
-      left: 50%;
-      background-color: #3498db;
-      transition: all 0.3s ease;
-      transform: translateX(-50%);
-    }
+        .menu-btn div {
+            width: 25px;
+            height: 3px;
+            background: #2c3e50;
+            margin: 5px;
+            transition: 0.3s;
+        }
 
-    nav a:hover {
-      color: #3498db;
-      background-color: rgba(52, 152, 219, 0.1);
-    }
+        .menu-btn.active div:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
 
-    nav a:hover::after {
-      width: 80%;
-    }
+        .menu-btn.active div:nth-child(2) {
+            opacity: 0;
+        }
 
-    /* Shine effect */
-    .logo::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(
-        45deg,
-        transparent 0%,
-        rgba(255,255,255,0.1) 45%,
-        rgba(255,255,255,0.5) 50%,
-        rgba(255,255,255,0.1) 55%,
-        transparent 100%
-      );
-      transform: rotate(45deg);
-      animation: shine 3s infinite;
-    }
+        .menu-btn.active div:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
 
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 250px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px;
+    transition: 0.5s ease;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    z-index: 1001;
+}
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        .nav-links.active {
+            right: 0;
+        }
 
-    @keyframes fadeInRight {
-      from {
-        opacity: 0;
-        transform: translateX(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3e50;
+            padding: 15px 25px;
+            font-size: 18px;
+            transition: 0.3s;
+        }
 
-    @keyframes shine {
-      0% {
-        left: -100%;
-        top: -100%;
-      }
-      100% {
-        left: 100%;
-        top: 100%;
-      }
-    }
+        .nav-links a:hover {
+            background: #f0f0f0;
+            color: #0ea5e9;
+        }
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .header-content {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      
-      .logo img {
-        width: 150px;
-        height: 48px;
-      }
-      
-      .logo p {
-        font-size: 18px;
-      }
+        .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 999;
+    transition: 0.3s;
+}
+body {
+    padding-top: 70px;
+}
 
-      nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-      }
+.main-hero {
+    margin-top: -70px;
+}
 
-      nav a {
-        font-size: 16px;
-        padding: 6px 12px;
-      }
-    }
+        .overlay.active {
+            display: block;
+        }
         /* Main Hero */
         .main-hero {
             height: 80vh;
@@ -446,6 +390,7 @@
             color: #0ea5e9;
         }
     </style>
+
 </head>
 <style>/* Modified Services Grid spacing */
   .services-grid {
@@ -500,23 +445,50 @@
       padding: 50px 20px; /* Reduced from 100px 20px */
   }</style>
 <body>
-  <header style="display: flex; align-items: center; justify-content: space-between;">
-    <div class="logo">
-      <a href="index.html" style="text-decoration: none;">
-        <p style="font-size: 0;">
-          <span style="font-family: geometric sans-serif; font-size: 40px; color: #0ea5e9;">BOLD</span><span style="font-family: sans-serif; font-size: 38px; color: #000;">MIND</span>
-        </p>
-      </a>
-    </div>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="BOLDMIND - About Us.html">About</a>
-        <a href="BOLDMIND - Services.html">Services</a>
-        <a href="BOLDMIND - Contact Us.html">Contact</a>
-    </nav>
-</header>
- 
 
+    <div class="overlay"></div>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <p style="font-size: 0;">
+                        <span>BOLD</span><span>MIND</span>
+                    </p>
+                </a>
+            </div>
+
+            <div class="menu-btn">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="BOLDMIND - About Us.html">About</a>
+                <a href="BOLDMIND - Services.html">Services</a>
+                <a href="BOLDMIND - Contact Us.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <script>
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        const overlay = document.querySelector('.overlay');
+
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            menuBtn.classList.remove('active');
+            navLinks.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+    </script>
 <section class="main-hero">
   <div class="slideshow-container">
       <div class="slide fade" style="background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('image/9.jpeg')"></div>
