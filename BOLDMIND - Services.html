@@ -477,7 +477,7 @@
             </div>
         </div>
     </div>
-   <style>
+ <style>
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -524,76 +524,131 @@
             background-color: #0ea5e9;
             color: white;
         }
-        #map {
+        #locationImage {
             flex-grow: 1;
-            height: 600px;
+            height: 500px;
             border-radius: 12px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
     </style>
+</head>
+<body>
     <div class="container">
         <h1 class="section-title">Our Locations in Lagos</h1>
         
         <div class="locations-container">
             <div class="locations-list" id="locationsList"></div>
-            <div id="map"></div>
+            <div id="locationImage"></div>
         </div>
     </div>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
     <script>
-        let map;
         const locations = [
-            { title: "Capitol Road Agege", lat: 6.6164, lng: 3.3452 },
-            { title: "Alakija, Amuwo Odofin", lat: 6.4492, lng: 3.2906 },
-            { title: "Agboju Market, Amuwo Odofin", lat: 6.4562, lng: 3.3043 },
-            { title: "Cele Express, Okota", lat: 6.5413, lng: 3.3585 },
-            { title: "Akin Adesola, VI", lat: 6.4301, lng: 3.4218 },
-            { title: "Oba Ogunji, Agege", lat: 6.6245, lng: 3.3471 },
-            { title: "Elephant House, Lagos Island", lat: 6.4516, lng: 3.4021 },
-            { title: "1st Avenue, Festac", lat: 6.4668, lng: 3.2872 },
-            { title: "Ahmadu Bello Way, VI", lat: 6.4300, lng: 3.4250 },
-            { title: "Bourdillon Road, Ikoyi", lat: 6.4370, lng: 3.4250 },
-            { title: "Mobolaji Bank Anthony Way, Ikeja", lat: 6.5800, lng: 3.3583 },
-            { title: "Kosofe Road, Berger", lat: 6.6180, lng: 3.3583 },
-            { title: "Sunday Market, Ogba", lat: 6.6250, lng: 3.3400 }
+            { 
+                title: "Capitol Road Agege", 
+                image: "image/capitol.jpeg" 
+            },
+            { 
+                title: "Alakija, Amuwo Odofin", 
+                image: "image/alakija.jpeg" 
+            },
+            { 
+                title: "Agboju Market, Amuwo Odofin", 
+                image: "image/agboju.jpeg" 
+            },
+            { 
+                title: "Cele Express, Okota", 
+                image: "image/cele.jpeg" 
+            },
+            { 
+                title: "Akin Adesola, VI", 
+                image: "image/akin.jpeg" 
+            },
+            { 
+                title: "Oba Ogunji, Agege", 
+                image: "image/7.jpeg" 
+            },
+            { 
+                title: "Sunday Market, Ogba", 
+                image: "image/Sunday.jpeg" 
+            },
+            { 
+                title: "Kosofe, Berger", 
+                image: "image/kosofe.jpeg" 
+            },
+            { 
+                title: "Mobolaji Bank Anthony Way, Ikeja", 
+                image: "image/mobolaji.jpeg" 
+            },
+            { 
+                title: "Ahmadu Bello Way, VI", 
+                image: "image/ahmadu.jpeg" 
+            },
+            { 
+                title: "Along Ikorodu Road", 
+                image: "image/AlongI.jpeg" 
+            },
+            { 
+                title: "Along Ojuwoya, Mushin", 
+                image: "image/alongO.jpeg" 
+            },
+            { 
+                title: "Elephant House, Lagos Island", 
+                image: "image/elephant.jpeg" 
+            },
+            { 
+                title: "1st Avenue, Festac", 
+                image: "image/1st.jpeg" 
+            },
+            { 
+                title: "Allen, Ikeja", 
+                image: "image/allen.jpeg" 
+            },
+            { 
+                title: "Bourdillon, Ikoyi", 
+                image: "image/bourdillon.jpeg" 
+            },
         ];
 
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 6.5244, lng: 3.3792 },
-                zoom: 11
-            });
-
+        function initLocations() {
             const locationsList = document.getElementById('locationsList');
-            const markers = [];
+            const locationImage = document.getElementById('locationImage');
+
+            // Set default image
+            locationImage.style.backgroundImage = `url(${locations[0].image})`;
 
             locations.forEach((location, index) => {
-                const marker = new google.maps.Marker({
-                    position: { lat: location.lat, lng: location.lng },
-                    map: map,
-                    title: location.title
-                });
-                markers.push(marker);
-
                 const locationCard = document.createElement('div');
                 locationCard.classList.add('location-card');
                 locationCard.textContent = location.title;
+                
                 locationCard.addEventListener('click', () => {
+                    // Remove active class from all cards
                     document.querySelectorAll('.location-card').forEach(card => {
                         card.classList.remove('active');
                     });
 
+                    // Add active class to clicked card
                     locationCard.classList.add('active');
-                    map.setCenter({ lat: location.lat, lng: location.lng });
-                    map.setZoom(15);
 
-                    markers.forEach(m => m.setAnimation(null));
-                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                    // Change image
+                    locationImage.style.backgroundImage = `url(${location.image})`;
                 });
+
+                // Mark first location as active by default
+                if (index === 0) {
+                    locationCard.classList.add('active');
+                }
+
                 locationsList.appendChild(locationCard);
             });
         }
+
+        // Initialize on page load
+        window.onload = initLocations;
     </script>
       </section>
 
