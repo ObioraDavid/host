@@ -477,116 +477,124 @@
             </div>
         </div>
     </div>
-    <style>
+   <style>
         body {
-          font-family: Arial, sans-serif;
-          margin: 0;
-          padding: 0;
-          background: linear-gradient(to bottom, #e6f7ff, #ffffff);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #e6f7ff, #ffffff);
         }
-    
-        .section {
-          padding: 20px;
-          max-width: 800px;
-          margin: auto;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
-    
-        .section h1 {
-          text-align: center;
-          font-size: 2.5em;
-          color: #2a7ba7;
-          animation: fadeIn 1.5s;
+        .section-title {
+            text-align: center;
+            color: #0ea5e9;
+            font-size: 2.5em;
+            margin-bottom: 30px;
         }
-    
-        .locations {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-around;
-          gap: 20px;
+        .locations-container {
+            display: flex;
+            gap: 20px;
         }
-    
-        .location {
-          background: #ffffff;
-          border: 1px solid #d9d9d9;
-          border-radius: 8px;
-          padding: 15px;
-          width: calc(50% - 20px);
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          transition: transform 0.3s;
+        .locations-list {
+            width: 250px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
         }
-    
-        .location:hover {
-          transform: scale(1.05);
+        .location-card {
+            background: white;
+            border: 1px solid #d9d9d9;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-    
-        .map {
-          height: 400px;
-          margin-top: 20px;
-          border-radius: 8px;
+        .location-card:hover {
+            background-color: #f0f8ff;
+            transform: scale(1.02);
         }
-    
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
+        .location-card.active {
+            background-color: #0ea5e9;
+            color: white;
         }
-      </style>
-      <section> 
-        <div class="section">
-            <h1 style="color: #0ea5e9;">Our Locations in Lagos</h1><br>
+        #map {
+            flex-grow: 1;
+            height: 600px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <div class="container">
+        <h1 class="section-title">Our Locations in Lagos</h1>
         
-            <div class="locations">
-              <div class="location">Capitol Road Agege</div>
-              <div class="location">Alakija, Amuwo Odofin</div>
-              <div class="location">Agboju Market, Amuwo Odofin</div><br>
-              <div class="location">Cele Express, Okota</div>
-              <div class="location">Akin Adesola, VI</div>
-              <div class="location">Oba Ogunji, Agege</div>
-              <div class="location">Elephant House, Lagos Island</div>
-              <div class="location">1st Avenue, Festac</div>
-              <div class="location">Capitol Road, Agege</div>
-              <div class="location">Ojuwoye Market, Mushin</div>
-              <div class="location">Ahmadu Bello Way, VI</div>
-              <div class="location">Bourdillon Road, Ikoyi</div>
-              <div class="location">Mobolaji Bank Anthony Way, Ikeja</div>
-              <div class="location">Kosofe Road, Berger</div>
-              <div class="location">Sunday Market, Ogba</div>
-              <div class="location">Oba Ogunji, Agege</div>
-            </div>
-        
-            <div id="map" class="map"></div>
-          </div>
-<script>
-     function initMap() {
-      const locations = [
-        { title: "Capitol Road Agege", position: { lat: 6.6164, lng: 3.3452 } },
-        { title: "Alakija, Amuwo Odofin", position: { lat: 6.4492, lng: 3.2906 } },
-        { title: "Agboju Market, Amuwo Odofin", position: { lat: 6.4562, lng: 3.3043 } },
-        { title: "Cele Express, Okota", position: { lat: 6.5413, lng: 3.3585 } },
-        { title: "Akin Adesola, VI", position: { lat: 6.4301, lng: 3.4218 } },
-        { title: "Oba Ogunji, Agege", position: { lat: 6.6245, lng: 3.3471 } },
-        { title: "Elephant House, Lagos Island", position: { lat: 6.4516, lng: 3.4021 } },
-        { title: "1st Avenue, Festac", position: { lat: 6.4668, lng: 3.2872 } }
-      ];
+        <div class="locations-container">
+            <div class="locations-list" id="locationsList"></div>
+            <div id="map"></div>
+        </div>
+    </div>
 
-      const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 12,
-        center: { lat: 6.5244, lng: 3.3792 }, // Centered on Lagos
-      });
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
+    <script>
+        let map;
+        const locations = [
+            { title: "Capitol Road Agege", lat: 6.6164, lng: 3.3452 },
+            { title: "Alakija, Amuwo Odofin", lat: 6.4492, lng: 3.2906 },
+            { title: "Agboju Market, Amuwo Odofin", lat: 6.4562, lng: 3.3043 },
+            { title: "Cele Express, Okota", lat: 6.5413, lng: 3.3585 },
+            { title: "Akin Adesola, VI", lat: 6.4301, lng: 3.4218 },
+            { title: "Oba Ogunji, Agege", lat: 6.6245, lng: 3.3471 },
+            { title: "Elephant House, Lagos Island", lat: 6.4516, lng: 3.4021 },
+            { title: "1st Avenue, Festac", lat: 6.4668, lng: 3.2872 },
+            { title: "Ahmadu Bello Way, VI", lat: 6.4300, lng: 3.4250 },
+            { title: "Bourdillon Road, Ikoyi", lat: 6.4370, lng: 3.4250 },
+            { title: "Mobolaji Bank Anthony Way, Ikeja", lat: 6.5800, lng: 3.3583 },
+            { title: "Kosofe Road, Berger", lat: 6.6180, lng: 3.3583 },
+            { title: "Sunday Market, Ogba", lat: 6.6250, lng: 3.3400 }
+        ];
 
-      locations.forEach((location) => {
-        const marker = new google.maps.Marker({
-          position: location.position,
-          map,
-          title: location.title,
-        });
-      });
-    }
-  </script>
-</script>        
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 6.5244, lng: 3.3792 },
+                zoom: 11
+            });
+
+            const locationsList = document.getElementById('locationsList');
+            const markers = [];
+
+            locations.forEach((location, index) => {
+                const marker = new google.maps.Marker({
+                    position: { lat: location.lat, lng: location.lng },
+                    map: map,
+                    title: location.title
+                });
+                markers.push(marker);
+
+                const locationCard = document.createElement('div');
+                locationCard.classList.add('location-card');
+                locationCard.textContent = location.title;
+                locationCard.addEventListener('click', () => {
+                    document.querySelectorAll('.location-card').forEach(card => {
+                        card.classList.remove('active');
+                    });
+
+                    locationCard.classList.add('active');
+                    map.setCenter({ lat: location.lat, lng: location.lng });
+                    map.setZoom(15);
+
+                    markers.forEach(m => m.setAnimation(null));
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                });
+                locationsList.appendChild(locationCard);
+            });
+        }
+    </script>
       </section>
 
 
